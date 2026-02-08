@@ -4,7 +4,8 @@ import PackageDescription
 let package = Package(
     name: "TrustNetApp",
     platforms: [
-        .iOS(.v14)
+        .iOS(.v14),
+        .macOS(.v11)
     ],
     products: [
         .library(name: "TrustNetCore", targets: ["TrustNetCore"]),
