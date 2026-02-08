@@ -2,25 +2,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "TrustNetApp",
-    platforms: [
-        .iOS(.v14),
-        .macOS(.v11)
-    ],
+    name: "ios-app",
     products: [
         .library(name: "TrustNetCore", targets: ["TrustNetCore"]),
     ],
-    dependencies: [],
     targets: [
-        .target(
-            name: "TrustNetCore",
-            dependencies: [],
-            path: "Sources"
-        ),
-        .testTarget(
-            name: "TrustNetCoreTests",
-            dependencies: ["TrustNetCore"],
-            path: "Tests"
-        ),
+        .target(name: "TrustNetCore", path: "Sources"),
+        .testTarget(name: "TrustNetCoreTests", dependencies: ["TrustNetCore"], path: "Tests"),
     ]
 )
