@@ -6,20 +6,18 @@
 	objectVersion = 54;
 	objects = {
 		FA0001B02BD5A1C40027F4A6 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TrustNetValidator/App.swift"; sourceTree = "<group>"; };
-		FA0001B12BD5A1C40027F4A6 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TrustNetValidator/ContentView.swift"; sourceTree = "<group>"; };
 		FA0001B22BD5A1C40027F4A6 /* PassportValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sources/PassportValidator.swift"; sourceTree = "<group>"; };
 		FA0001B32BD5A1C40027F4A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "TrustNetValidator/Assets.xcassets"; sourceTree = "<group>"; };
 		FA0001B42BD5A1C40027F4A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TrustNetValidator/Info.plist"; sourceTree = "<group>"; };
 		FA0001C82BD5A1C40027F4A6 /* TrustNetValidator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrustNetValidator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0001B62BD5A1C40027F4A6 /* Sources */ = {isa = PBXGroup; children = (FA0001B22BD5A1C40027F4A6, ); name = Sources; sourceTree = "<group>"; };
-		FA0001B72BD5A1C40027F4A6 /* TrustNetValidator */ = {isa = PBXGroup; children = (FA0001B02BD5A1C40027F4A6, FA0001B12BD5A1C40027F4A6, FA0001B32BD5A1C40027F4A6, FA0001B42BD5A1C40027F4A6, ); path = TrustNetValidator; sourceTree = "<group>"; };
+		FA0001B72BD5A1C40027F4A6 /* TrustNetValidator */ = {isa = PBXGroup; children = (FA0001B02BD5A1C40027F4A6, FA0001B32BD5A1C40027F4A6, FA0001B42BD5A1C40027F4A6, ); path = TrustNetValidator; sourceTree = "<group>"; };
 		FA0001B82BD5A1C40027F4A6 /* TrustNetValidator */ = {isa = PBXGroup; children = (FA0001B62BD5A1C40027F4A6, FA0001B72BD5A1C40027F4A6, ); sourceTree = "<group>"; };
 		FA0001C72BD5A1C40027F4A6 /* Products */ = {isa = PBXGroup; children = (FA0001C82BD5A1C40027F4A6, ); name = Products; sourceTree = "<group>"; };
-		FA0001C92BD5A1C40027F4A6 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (FA0001D12BD5A1C40027F4A6, FA0001D22BD5A1C40027F4A6, FA0001D32BD5A1C40027F4A6, ); runOnlyForDeploymentPostprocessing = 0; };
+		FA0001C92BD5A1C40027F4A6 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (FA0001D12BD5A1C40027F4A6, FA0001D32BD5A1C40027F4A6, ); runOnlyForDeploymentPostprocessing = 0; };
 		FA0001CA2BD5A1C40027F4A6 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 		FA0001CB2BD5A1C40027F4A6 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (FA0001D42BD5A1C40027F4A6, FA0001D52BD5A1C40027F4A6, ); runOnlyForDeploymentPostprocessing = 0; };
 		FA0001D12BD5A1C40027F4A6 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0001B02BD5A1C40027F4A6; };
-		FA0001D22BD5A1C40027F4A6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0001B12BD5A1C40027F4A6; };
 		FA0001D32BD5A1C40027F4A6 /* PassportValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0001B22BD5A1C40027F4A6; };
 		FA0001D42BD5A1C40027F4A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0001B32BD5A1C40027F4A6; };
 		FA0001D52BD5A1C40027F4A6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0001B42BD5A1C40027F4A6; };
