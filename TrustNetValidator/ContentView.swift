@@ -170,17 +170,17 @@ struct ContentView: View {
                 results.append("✅ All Tests Passed!")
                 
                 DispatchQueue.main.async {
-                    testResults = results
-                    allPassed = true
-                    isLoading = false
+                    self.testResults = results
+                    self.allPassed = true
+                    self.isLoading = false
                 }
                 
             } catch {
                 results.append("❌ Error: \(error.localizedDescription)")
                 DispatchQueue.main.async {
-                    testResults = results
-                    allPassed = false
-                    isLoading = false
+                    self.testResults = results
+                    self.allPassed = false
+                    self.isLoading = false
                 }
             }
         }
