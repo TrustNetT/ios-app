@@ -2,9 +2,21 @@ import SwiftUI
 
 @main
 struct TrustNetApp: App {
+    @State private var showSplash = true
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ZStack {
+                if showSplash {
+                    SplashScreenView {
+                        withAnimation {
+                            showSplash = false
+                        }
+                    }
+                } else {
+                    ContentView()
+                }
+            }
         }
     }
 }
