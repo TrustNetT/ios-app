@@ -290,7 +290,7 @@
 		FA0001EA2BD5A1C50027F4A6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FA0001CC2BD5A1C40027F4A6 /* TrustNetValidator */;
-			targetProxy = FA0001E92BD5A1C50027F4A6 /* PBXContainerItemProxy */,
+			targetProxy = FA0001E92BD5A1C50027F4A6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
