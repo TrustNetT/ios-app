@@ -1,6 +1,7 @@
 import Foundation
 import CryptoKit
 
+@available(iOS 13.0, macOS 10.15, *)
 public class PassportValidator {
     public init() {}
     
