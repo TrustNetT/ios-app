@@ -8,11 +8,12 @@ let package = Package(
     ],
     products: [
         .library(name: "TrustNetCore", targets: ["TrustNetCore"]),
+        .executable(name: "test-validator", targets: ["ValidatorTests"]),
     ],
     targets: [
         .target(name: "TrustNetCore", path: "Sources"),
-        .testTarget(
-            name: "TrustNetCoreTests",
+        .executableTarget(
+            name: "ValidatorTests",
             dependencies: ["TrustNetCore"],
             path: "Tests"
         ),
