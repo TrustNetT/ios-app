@@ -11,5 +11,10 @@ let package = Package(
     ],
     targets: [
         .target(name: "TrustNetCore", path: "Sources"),
+        .testTarget(
+            name: "TrustNetCoreTests",
+            dependencies: ["TrustNetCore"],
+            path: "Tests"
+        ),
     ]
 )
