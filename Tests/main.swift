@@ -2,10 +2,11 @@ import Foundation
 import TrustNetCore
 import CryptoKit
 
-print("🧪 TrustNet PassportValidator Test Suite")
-print("=" * 50)
-
-do {
+@available(iOS 13.0, macOS 10.15, *)
+func runTests() throws {
+    print("🧪 TrustNet PassportValidator Test Suite")
+    print(String(repeating: "=", count: 50))
+    
     // Test 1: Initialize validator
     print("\n✓ Test 1: PassportValidator Initialization")
     let validator = PassportValidator()
@@ -61,11 +62,20 @@ do {
         print("  ❌ Wrong key PASSED validation (unexpected!)")
     }
     
-    print("\n" + "=" * 50)
+    print("\n" + String(repeating: "=", count: 50))
     print("✅ All tests passed!")
     print("🎉 TrustNet iOS library is working correctly")
-    
-} catch {
-    print("\n❌ Test failed with error: \(error)")
+}
+
+// Run tests with availability check
+if #available(macOS 10.15, *) {
+    do {
+        try runTests()
+    } catch {
+        print("\n❌ Test failed with error: \(error)")
+        exit(1)
+    }
+} else {
+    print("❌ Tests require macOS 10.15 or later")
     exit(1)
 }
