@@ -1,6 +1,5 @@
 import SwiftUI
 import CryptoKit
-import TrustNetCore
 
 @available(iOS 14, *)
 struct ContentView: View {
