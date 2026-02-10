@@ -6,8 +6,8 @@ struct LoginView: View {
     @State private var isLoading = false
     @State private var errorMessage: String? = nil
     
-    var onLoginSuccess: () -> Void
-    var onRegisterTapped: () -> Void
+    @Binding var showRegistration: Bool
+    @Binding var isAuthenticated: Bool
     
     var body: some View {
         ZStack {
@@ -96,7 +96,7 @@ struct LoginView: View {
                         .font(.system(size: 14))
                         .foregroundColor(.white.opacity(0.8))
                     Button("Create one") {
-                        onRegisterTapped()
+                        showRegistration = true
                     }
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.white)
@@ -127,7 +127,7 @@ struct LoginView: View {
                 }
                 
                 isLoading = false
-                onLoginSuccess()
+                isAuthenticated = true  // Update binding to show Dashboard
             } else {
                 errorMessage = "Invalid credentials. Please try again."
                 isLoading = false
@@ -142,8 +142,10 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(
-        onLoginSuccess: {},
-        onRegisterTapped: {}
+    @State var showRegistration = false
+    @State var isAuthenticated = false
+    return LoginView(
+        showRegistration: $showRegistration,
+        isAuthenticated: $isAuthenticated
     )
 }

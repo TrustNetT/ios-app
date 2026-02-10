@@ -7,8 +7,8 @@ struct RegistrationView: View {
     @State private var isLoading = false
     @State private var errorMessage: String? = nil
     
-    var onRegistrationSuccess: () -> Void
-    var onBackToLogin: () -> Void
+    @Binding var showRegistration: Bool
+    @Binding var isAuthenticated: Bool
     
     var body: some View {
         ZStack {
@@ -104,7 +104,7 @@ struct RegistrationView: View {
                 
                 // Back to Login Link
                 Button("Back to Login") {
-                    onBackToLogin()
+                    showRegistration = false
                 }
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(.white)
@@ -139,7 +139,7 @@ struct RegistrationView: View {
             }
             
             isLoading = false
-            onRegistrationSuccess()
+            isAuthenticated = true  // Update binding to show Dashboard
         }
     }
     
@@ -165,8 +165,10 @@ struct RegistrationView: View {
 }
 
 #Preview {
-    RegistrationView(
-        onRegistrationSuccess: {},
-        onBackToLogin: {}
+    @State var showRegistration = true
+    @State var isAuthenticated = false
+    return RegistrationView(
+        showRegistration: $showRegistration,
+        isAuthenticated: $isAuthenticated
     )
 }

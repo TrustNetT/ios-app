@@ -3,6 +3,8 @@ import SwiftUI
 @main
 struct TrustNetApp: App {
     @State private var showSplash = true
+    @State private var isAuthenticated = false
+    @State private var showRegistration = false
     
     var body: some Scene {
         WindowGroup {
@@ -10,14 +12,33 @@ struct TrustNetApp: App {
                 if showSplash {
                     SplashScreenView {
                         withAnimation {
+                            // After splash, check if user is authenticated
+                            isAuthenticated = checkLoginCookie()
                             showSplash = false
                         }
                     }
-                } else {
+                } else if isAuthenticated {
+                    // User is logged in - show dashboard
                     ContentView()
+                } else if showRegistration {
+                    // User wants to create account
+                    RegistrationView(showRegistration: $showRegistration, isAuthenticated: $isAuthenticated)
+                } else {
+                    // User not logged in - show login
+                    LoginView(showRegistration: $showRegistration, isAuthenticated: $isAuthenticated)
                 }
             }
         }
+    }
+    
+    // MARK: - Authentication Checking
+    
+    /// Check if user has a valid login cookie
+    private func checkLoginCookie() -> Bool {
+        if let cookies = HTTPCookieStorage.shared.cookies(for: URL(string: "https://trustnet.local")?) {
+            return cookies.contains { $0.name == "trustnet_session" }
+        }
+        return false
     }
 }
 
