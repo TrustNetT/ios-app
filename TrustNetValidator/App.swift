@@ -23,10 +23,7 @@ struct TrustNetApp: App {
         }
     }
     
-    // MARK: - State Management
-    
     private func completeOnboarding() {
-        // Check if user has valid session
         if checkLoginCookie() {
             appState = .dashboard
         } else {
@@ -34,14 +31,11 @@ struct TrustNetApp: App {
         }
     }
     
-    /// Check if user has a valid login cookie
     private func checkLoginCookie() -> Bool {
-        // Check UserDefaults for stored session token
         return UserDefaults.standard.string(forKey: "trustnet_session_token") != nil
     }
 }
 
-// MARK: - App State Enum
 enum AppState {
     case splash
     case login
@@ -53,7 +47,6 @@ enum AppState {
 struct ContentView: View {
     @Binding var appState: AppState
     @State private var refreshing = false
-    @State private var userName: String = ""
     
     var body: some View {
         ZStack {
@@ -70,28 +63,25 @@ struct ContentView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     // Header with Logout
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("TrustNet Node")
-                                    .font(.system(size: 32, weight: .bold))
-                                    .foregroundColor(.white)
-                                Text("Node Operator Dashboard")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.white.opacity(0.7))
-                            }
-                            Spacer()
-                            Button(action: logout) {
-                                Image(systemName: "power")
-                                    .font(.system(size: 18, weight: .semibold))
-                                    .foregroundColor(.white)
-                                    .padding(12)
-                                    .background(Color.white.opacity(0.2))
-                                    .clipShape(Circle())
-                            }
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("TrustNet Node")
+                                .font(.system(size: 32, weight: .bold))
+                                .foregroundColor(.white)
+                            Text("Node Operator Dashboard")
+                                .font(.system(size: 14))
+                                .foregroundColor(.white.opacity(0.7))
+                        }
+                        Spacer()
+                        Button(action: logout) {
+                            Image(systemName: "power")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(.white)
+                                .padding(12)
+                                .background(Color.white.opacity(0.2))
+                                .clipShape(Circle())
                         }
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
                     .padding(.top, 20)
                     
@@ -185,31 +175,7 @@ struct ContentView: View {
                     .cornerRadius(8)
                     .padding(.horizontal, 20)
                     
-                    // Refresh Button
-                    Button(action: {
-                        refreshing = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            refreshing = false
-                        }
-                    }) {
-                        HStack {
-                            Image(systemName: "arrow.clockwise")
-                                .rotationEffect(.degrees(refreshing ? 360 : 0))
-                                .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: refreshing)
-                            Text("Refresh")
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(12)
-                        .background(Color.white)
-                        .foregroundColor(Color(red: 0.08, green: 0.57, blue: 0.76))
-                        .font(.system(size: 14, weight: .semibold))
-                        .cornerRadius(8)
-                    }
-                    .disabled(refreshing)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 12)
-                    
-                    Spacer().frame(height: 20)
+                    Spacer()
                 }
             }
         }
@@ -226,7 +192,6 @@ struct ContentView: View {
 
 // MARK: - Splash Screen
 struct SplashScreenView: View {
-    @State private var animateGradient = false
     let onComplete: () -> Void
     
     var body: some View {
@@ -244,7 +209,6 @@ struct SplashScreenView: View {
             VStack(spacing: 20) {
                 Spacer()
                 
-                // Logo/Title
                 VStack(spacing: 12) {
                     Image(systemName: "checkmark.seal.fill")
                         .font(.system(size: 60))
@@ -261,16 +225,13 @@ struct SplashScreenView: View {
                 
                 Spacer()
                 
-                // Loading indicator
                 ProgressView()
                     .progressViewStyle(.circular)
-                    .tint(.white)
                     .scaleEffect(1.5)
             }
             .padding(40)
         }
         .onAppear {
-            // Display splash for at least 3 seconds
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 withAnimation {
                     onComplete()
@@ -302,7 +263,6 @@ struct LoginView: View {
             .ignoresSafeArea()
             
             VStack(spacing: 24) {
-                // Header
                 VStack(spacing: 8) {
                     Text("Welcome Back")
                         .font(.system(size: 32, weight: .bold))
@@ -314,24 +274,20 @@ struct LoginView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 24)
                 
-                // Form
                 VStack(spacing: 16) {
-                    // Email field
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Email")
                             .font(.system(size: 14, weight: .semibold))
                             .foregroundColor(.white)
                         TextField("Enter your email", text: $email)
                             .textContentType(.emailAddress)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
+                            .autocapitalization(.none)
                             .padding(12)
                             .background(Color.white.opacity(0.2))
                             .cornerRadius(8)
                             .foregroundColor(.white)
                     }
                     
-                    // Password field
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Password")
                             .font(.system(size: 14, weight: .semibold))
@@ -342,7 +298,6 @@ struct LoginView: View {
                             .cornerRadius(8)
                     }
                     
-                    // Error message
                     if showError {
                         Text(errorMessage)
                             .font(.system(size: 12))
@@ -353,24 +308,17 @@ struct LoginView: View {
                 
                 Spacer()
                 
-                // Login Button
                 Button(action: performLogin) {
-                    if isLoading {
-                        ProgressView()
-                            .tint(.white)
-                    } else {
-                        Text("Sign In")
-                    }
+                    Text(isLoading ? "Signing in..." : "Sign In")
+                        .frame(maxWidth: .infinity)
+                        .padding(14)
+                        .background(Color.white)
+                        .foregroundColor(Color(red: 0.6, green: 0.3, blue: 0.8))
+                        .font(.system(size: 16, weight: .semibold))
+                        .cornerRadius(8)
                 }
-                .frame(maxWidth: .infinity)
-                .padding(14)
-                .background(Color.white)
-                .foregroundColor(Color(red: 0.6, green: 0.3, blue: 0.8))
-                .font(.system(size: 16, weight: .semibold))
-                .cornerRadius(8)
                 .disabled(isLoading || email.isEmpty || password.isEmpty)
                 
-                // Register button
                 Button(action: {
                     withAnimation {
                         appState = .registration
@@ -392,10 +340,8 @@ struct LoginView: View {
     
     private func performLogin() {
         isLoading = true
-        // Simulate API call
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             if email.contains("@") && password.count >= 6 {
-                // Simulate successful login
                 UserDefaults.standard.set("mock_session_token_123", forKey: "trustnet_session_token")
                 UserDefaults.standard.set(email.components(separatedBy: "@")[0], forKey: "trustnet_user_name")
                 
@@ -436,7 +382,6 @@ struct RegistrationView: View {
             
             ScrollView {
                 VStack(spacing: 24) {
-                    // Header
                     HStack {
                         Button(action: {
                             withAnimation {
@@ -461,9 +406,7 @@ struct RegistrationView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 12)
                     
-                    // Form
                     VStack(spacing: 16) {
-                        // Full Name
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Full Name")
                                 .font(.system(size: 14, weight: .semibold))
@@ -476,22 +419,19 @@ struct RegistrationView: View {
                                 .foregroundColor(.white)
                         }
                         
-                        // Email
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Email")
                                 .font(.system(size: 14, weight: .semibold))
                                 .foregroundColor(.white)
                             TextField("Enter your email", text: $email)
                                 .textContentType(.emailAddress)
-                                .autocorrectionDisabled()
-                                .textInputAutocapitalization(.never)
+                                .autocapitalization(.none)
                                 .padding(12)
                                 .background(Color.white.opacity(0.2))
                                 .cornerRadius(8)
                                 .foregroundColor(.white)
                         }
                         
-                        // Password
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Password")
                                 .font(.system(size: 14, weight: .semibold))
@@ -502,7 +442,6 @@ struct RegistrationView: View {
                                 .cornerRadius(8)
                         }
                         
-                        // Confirm Password
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Confirm Password")
                                 .font(.system(size: 14, weight: .semibold))
@@ -513,7 +452,6 @@ struct RegistrationView: View {
                                 .cornerRadius(8)
                         }
                         
-                        // Error message
                         if showError {
                             Text(errorMessage)
                                 .font(.system(size: 12))
@@ -524,24 +462,17 @@ struct RegistrationView: View {
                     
                     Spacer()
                     
-                    // Register Button
                     Button(action: performRegistration) {
-                        if isLoading {
-                            ProgressView()
-                                .tint(.white)
-                        } else {
-                            Text("Create Account")
-                        }
+                        Text(isLoading ? "Creating..." : "Create Account")
+                            .frame(maxWidth: .infinity)
+                            .padding(14)
+                            .background(Color.white)
+                            .foregroundColor(Color(red: 0.6, green: 0.3, blue: 0.8))
+                            .font(.system(size: 16, weight: .semibold))
+                            .cornerRadius(8)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(14)
-                    .background(Color.white)
-                    .foregroundColor(Color(red: 0.6, green: 0.3, blue: 0.8))
-                    .font(.system(size: 16, weight: .semibold))
-                    .cornerRadius(8)
                     .disabled(isLoading || fullName.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty)
                     
-                    // Back to login
                     Button(action: {
                         withAnimation {
                             appState = .login
@@ -576,10 +507,8 @@ struct RegistrationView: View {
         }
         
         isLoading = true
-        // Simulate API call
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             if email.contains("@") {
-                // Simulate successful registration
                 UserDefaults.standard.set("mock_session_token_123", forKey: "trustnet_session_token")
                 UserDefaults.standard.set(fullName, forKey: "trustnet_user_name")
                 
