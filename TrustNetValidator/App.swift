@@ -196,42 +196,36 @@ struct SplashScreenView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 0.6, green: 0.3, blue: 0.8),
-                    Color(red: 0.1, green: 0.6, blue: 0.95)
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+            // White background
+            Color.white
+                .ignoresSafeArea()
             
-            VStack(spacing: 20) {
+            VStack(spacing: 30) {
                 Spacer()
                 
-                VStack(spacing: 12) {
-                    Image(systemName: "checkmark.seal.fill")
-                        .font(.system(size: 60))
-                        .foregroundColor(.white)
-                    
-                    Text("TrustNet")
-                        .font(.system(size: 40, weight: .bold))
-                        .foregroundColor(.white)
-                    
-                    Text("Node Operator")
-                        .font(.system(size: 16))
-                        .foregroundColor(.white.opacity(0.8))
-                }
+                // TrustNet Logo
+                Image("Logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
+                
+                // TrustNet Text
+                Text("TrustNet")
+                    .font(.system(size: 36, weight: .bold))
+                    .foregroundColor(.black)
                 
                 Spacer()
                 
+                // Loading indicator
                 ProgressView()
                     .progressViewStyle(.circular)
                     .scaleEffect(1.5)
+                    .padding(.bottom, 40)
             }
             .padding(40)
         }
         .onAppear {
+            // Display splash for at least 3 seconds
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 withAnimation {
                     onComplete()
