@@ -115,7 +115,7 @@ struct TrustNetApp: App {
                                 LinearGradient(
                                     gradient: Gradient(colors: [
                                         Color.blue,
-                                        Color.cyan
+                                        Color(red: 0.0, green: 1.0, blue: 1.0)  // cyan-like color
                                     ]),
                                     startPoint: .leading,
                                     endPoint: .trailing
@@ -123,7 +123,7 @@ struct TrustNetApp: App {
                             )
                             .foregroundColor(.white)
                             .cornerRadius(10)
-                            .fontWeight(.semibold)
+                            .font(.system(size: 16, weight: .semibold))
                         }
                         
                         Text("Phase 3 UI coming next")
